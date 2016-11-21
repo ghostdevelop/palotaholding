@@ -46,10 +46,10 @@ class WebcreativesContactWidget extends WP_Widget {
 		<?php echo $args['before_widget']; ?>
 		<?php if ( $title ) echo $args['before_title'] . $title . $args['after_title']; ?>
 			<ul class="contact-list">
-				<?php if ($address) : ?><li><span class="icon-home"></span><?php echo $address?></li><?php endif;?>
-				<?php if ($mail) : ?><li><span class="icon-envelope"></span><a href="mailto:<?php echo $mail?>"><?php echo $mail?></a></li><?php endif;?>
-				<?php if ($phone) : ?><li><span class="icon-phone"></span><a href="callto:<?php echo $phone?>"><?php echo $phone?></a></li><?php endif;?>
-				<?php if ($fax) : ?><li><span class="icon-print"></span><?php echo $fax?></li><?php endif;?>
+				<?php if ($address) : ?><li><span class="fa fa-home"></span><?php echo $address?></li><?php endif;?>
+				<?php if ($mail) : ?><li><span class="fa fa-envelope"></span><a href="mailto:<?php echo $mail?>"><?php echo $mail?></a></li><?php endif;?>
+				<?php if ($phone) : ?><li><span class="fa fa-phone"></span><a href="callto:<?php echo $phone?>"><?php echo $phone?></a></li><?php endif;?>
+				<?php if ($fax) : ?><li><span class="fa fa-print"></span><?php echo $fax?></li><?php endif;?>
 			</ul>
 		<?php echo $args['after_widget']; ?>
 <?php		

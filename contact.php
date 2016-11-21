@@ -1,6 +1,6 @@
 <?php /* Template Name: Kapcsolat */ ?>
 <?php get_header()?>
-	<div class="container content">
+	<div class="content">
 		<div class="row">
 			<?php get_sidebar()?>
 			<div class="col-md-9" id="content-wrap">

@@ -109,7 +109,7 @@
 									</fieldset>																
 									<fieldset>
 										<?php wp_nonce_field( 'edit_user_profile', 'edit_user_profile_nonce'); ?>
-										<input type="submit" name="submit-profile-data" value="Módosít"/>
+										<input type="submit" name="submit-profile-data" class="btn btn-default" value="Módosít"/>
 									</fieldset>																																
 								</form>
 								<br clear="all">

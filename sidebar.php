@@ -26,6 +26,7 @@
 							<input type="checkbox" name="flat_source[]" value="<?php echo $term->term_id?>"/><label><?php echo $term->name?></label>
 						</fieldset>
 					<?php endforeach;?>
+					<br clear="all">
 					<fieldset class="slider">
 						<label for="amount">Nettó bérleti díj/hó:</label>
 						<input type="text" id="amount" name="amount" readonly> 
@@ -38,7 +39,7 @@
 						<span>m<sup>2</sup></span>	
 						<div id="slider-range-size"></div>			
 					</fieldset>		
-					<button type="submit" class="flat-search-sidebar-button"><i class="fa fa-search" aria-hidden="true"></i>Szűrés</button>
+					<button type="submit" class="flat-search-sidebar-button btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>Szűrés</button>
 				</form>
 				<p>A paramétereket minden szűrés után újra be kell állítani</p>
 			</div>
