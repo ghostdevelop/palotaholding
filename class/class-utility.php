@@ -37,7 +37,7 @@ function user_can_licit($user_id, $flat_id){
 	
 	$auth = $wpdb->get_row("SELECT active FROM licits WHERE user_ID = $user_id AND flat_ID = $flat_id");	
 	
-	if ($auth->active) return true;
+	if (isset($auth->active) && $auth->active) return true;
 	
 	return false;
 }

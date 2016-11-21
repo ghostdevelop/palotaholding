@@ -47,7 +47,10 @@ div.container-fluid.block-11{
 .row.header-with-bg .navbar{
 	position: absolute;
 	bottom: 0;
+	padding: 2px 0;
+	border-radius: 0;
 	width: 100%;
+	background: #152a6d;
 }
 
 #header-navbar{
@@ -106,12 +109,18 @@ div.container-fluid.block-11{
 .header-with-bg nav{
 	border: none;
 }
-
-#header-navbar .searchform .form-control{
+.searchform input[type="text"]{
+	border: 1px solid #eee;
+	margin-right: 20px;
+	height: 40px;	
 	border-radius: 0;
-	border: none;
 	-webkit-box-shadow: none;
-	box-shadow: none;	
+	box-shadow: none;		
+}
+
+.searchform button[type="submit"]{
+	width: 40px;
+	height: 40px;
 }
 
 .footer-distributed{
@@ -119,6 +128,7 @@ div.container-fluid.block-11{
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
+	display: inline-block;	
 	text-align: left;
 	font: bold 16px sans-serif;
 	padding: 55px 50px;
@@ -703,7 +713,13 @@ div.widget{
 .navbar-default .navbar-nav>li>a{
 	color: #152a6d;
 	text-transform: uppercase;
-	font-weight: bold;	
+	border-left: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li:last-child>a{
+	border-right: 1px solid #eee;	
 }
 
 div.thumb-holder{
@@ -811,7 +827,7 @@ div.sale-info{
 	width: 40%;
 	float: right;
 	border: 5px solid #152a6d;	
-	margin-left: 10px;
+	margin-left: 1%;
 	margin-bottom: 10px;
 }
 
@@ -841,7 +857,7 @@ div.sale-info div.price span{
 }
 
 div.sale-info div > div{
-	margin: 0 0 10px;
+	margin: 0 0 0;
 	padding: 20px;
 }
 
@@ -971,7 +987,7 @@ div.flat div.flat-data h4{
 
 .entry-content,
 div.user-profile{
-	padding: 0 10px;	
+	padding: 0 0;	
 }
 
 #left-sidebar .widget-title {
@@ -994,8 +1010,45 @@ div.footer-bottom{
 	padding: 30px 50px;	
 }
 
+table.flat-parameters{
+	width: calc(100% - 15px);
+	margin: 15px;
+}
+table.flat-parameters thead th{
+	padding: 15px 5px;
+	font-size: 18px;
+	text-transform: uppercase;
+	color: white;
+	background: #152a6d;	
+}
 
+table.flat-parameters tr td{
+	padding: 5px 5px; 
+}
 
+table.flat-parameters tr:nth-child(even) td{
+	background: #eee;
+}
+
+.flexslider {
+
+}
+#slider.flexslider .slides li img{
+	width: calc(100% - 10px);
+	height: auto;
+	max-height: 100%;
+    border: 5px solid #152a6d;
+}
+
+#carousel.flexslider .slides li img{
+	width: calc(100% - 10px);
+    border: 5px solid #152a6d;	
+}
+
+#slider.flexslider .slides li {
+    width: 100%;
+    height: 500px;
+}	
 
 
 

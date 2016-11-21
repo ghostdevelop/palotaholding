@@ -83,14 +83,19 @@
 						<?php endif;?>
 						<?php $id = get_the_ID()?>
 						<?php $last_licit = $wpdb->get_row("SELECT * FROM licits WHERE flat_ID = $id");?>
+						<?php 
+							$amount = get_post_meta(get_the_ID(), 'amount', true);							
+						?>
 						<div class="sale-info">
 							<div class="price-box">
 								<div class="price">
 									<label><?php _e('Ár:', 'palotaholding')?></label><span><?php echo number_format(get_post_meta(get_the_ID(), 'price', true))?> HUF</span>
 								</div>
-								<div class="amount">
-									<label><?php _e('Licit lépcső:', 'palotaholding')?></label><span><?php echo number_format(get_post_meta(get_the_ID(), 'amount', true))?> HUF</span>
-								</div>
+								<?php if ($amount):?>
+									<div class="amount">
+										<label><?php _e('Licit lépcső:', 'palotaholding')?></label><span><?php echo number_format($amount)?> HUF</span>
+									</div>
+								<?php endif;?>
 							</div>
 							<div class="dates">
 								<div>
@@ -131,9 +136,28 @@
 						</div>
 						<div class="entry-content">
 							<?php the_content() ?>
-						</div>										
+						</div>			
+						<?php $parameters = SaleFlatPostType::get_fields('parameters'); $c = 0;?>
+						<table class="flat-parameters">
+							<thead>
+								<tr>
+									<th colspan="4"><?php _e('Lakás adatai', 'palotaholding')?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<?php foreach ($parameters as $key => $parameter): $c++;?>
+										<td><?php echo $parameter['label']?></td>
+										<td><?php echo get_post_meta(get_the_ID(), $key, true)?></td>
+										<?php if ($c % 2 == 0):?></tr><tr><?php endif;?>
+									<?php endforeach;?>	
+								</tr>
+							</tbody>
+						</table>						
+
+						<br clear="all">							
 						<?php $images = get_attached_media('image', get_the_ID())?>
-						<?php if (is_array($images) && !empty($images)):?>
+						<?php if (is_array($images) && !empty($images)):  $thumbs = "";?>
 							<!-- Place somewhere in the <body> of your page -->
 							<div id="slider" class="flexslider">
 							  <ul class="slides">
@@ -160,51 +184,29 @@
 		</div>
 	</div>
 <?php get_footer()?>
-<style>
-.flexslider {
-
-}
-#slider.flexslider .slides li img{
-	width: calc(100% - 10px);
-	height: auto;
-	max-height: 100%;
-    border: 5px solid #152a6d;
-}
-
-#carousel.flexslider .slides li img{
-	width: calc(100% - 10px);
-    border: 5px solid #152a6d;	
-}
-
-#slider.flexslider .slides li {
-    width: 100%;
-    height: 500px;
-}	
-</style>
-
-    <script>
-        jQuery(document).ready(function ($) {
-		  // The slider being synced must be initialized first
-		  $('#carousel').flexslider({
-		    animation: "slide",
-		    controlNav: false,
-		    animationLoop: false,
-		    slideshow: false,
-		    itemWidth: 210,
-		    itemMargin: 5,	    
-		    asNavFor: '#slider'
-		  });
-		 
-		  $('#slider').flexslider({
-		    animation: "slide",
-		    controlNav: false,
-		    animationLoop: false,
-		    slideshow: true,
-		    after: function(slider){
-		    	console.log($(this).find('.slides > li'));
-		       $(this).height( $(this).find('.slides > li').eq(slider.currentSlide).height() );
-		     },			    
-		    sync: "#carousel"
-		  });
-        });
-    </script>
+<script>
+    jQuery(document).ready(function ($) {
+	  // The slider being synced must be initialized first
+	  $('#carousel').flexslider({
+	    animation: "slide",
+	    controlNav: false,
+	    animationLoop: false,
+	    slideshow: false,
+	    itemWidth: 210,
+	    itemMargin: 5,	    
+	    asNavFor: '#slider'
+	  });
+	 
+	  $('#slider').flexslider({
+	    animation: "slide",
+	    controlNav: false,
+	    animationLoop: false,
+	    slideshow: true,
+	    after: function(slider){
+	    	console.log($(this).find('.slides > li'));
+	       $(this).height( $(this).find('.slides > li').eq(slider.currentSlide).height() );
+	     },			    
+	    sync: "#carousel"
+	  });
+    });
+</script>
