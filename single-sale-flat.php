@@ -15,14 +15,19 @@
 			$flat_id = (int) $_POST['flat_ID'];
 				
 			if (!user_send_licit_req($user_id, $flat_id)){
-				$query = $wpdb->insert('licits', array(
+				$wpdb->insert('licits', array(
 				    'user_ID' => $user_id,
 				    'flat_ID' => $flat_id,
 				    'active' => false
 				));			
+				$request_id = $wpdb->insert_id;
 				
-				if ($query){
-					$notifications['success'] = __('Sikeres licitálási kérelem.', 'palotaholding');				
+				if ($request_id){
+					$notifications['success'] = __('Sikeres licitálási kérelem.', 'palotaholding');	
+					ob_start(); // turn on output buffering
+					locate_template('get-licit-auth.php', true);				
+					$notifications['html'] = ob_get_contents(); // get the contents of the output buffer
+					ob_end_clean(); 								
 				} else {
 					$notifications['error'] = __('Sikertelen licitálási kérelem. További információért érdeklődj telefonon.', 'palotaholding');				
 				}

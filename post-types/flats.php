@@ -82,34 +82,49 @@ class FlatPostType {
 		wp_nonce_field( 'flat-options', 'flat-options_nonce' );
 
 		// Use get_post_meta to retrieve an existing value from the database.
-		$price = get_post_meta( $post->ID, 'price', true );
-		$address = get_post_meta( $post->ID, 'address', true );
-		$size = get_post_meta( $post->ID, 'size', true );
+		$price = get_post_meta( $post->ID, '_price', true );
+		$price_m2 = get_post_meta( $post->ID, '_price_m2', true );
+		$price_h = get_post_meta( $post->ID, '_price_h', true );
+		$plyzbiztkft = get_post_meta( $post->ID, '_plyzbiztkft', true );
+		$size = get_post_meta( $post->ID, '_size', true );
+		$latlng = get_post_meta( $post->ID, '_latlng', true );
 		
 		echo '<style>';
 		echo '.admin-meta-input{display:block; margin-top: 10px;}';
 		echo '</style>';
 		
 		echo '<label>' . __('Ár:') . '</label>';
-		echo '<input type="number" class="admin-meta-input" name="price" value="'.$price.'" />';
+		echo '<input type="number" class="admin-meta-input" name="_price" value="'.$price.'" />';
 		echo '<br clear="all">';
 		
 		echo '<label>' . __('Alapterület:') . '</label>';
-		echo '<input type="number" class="admin-meta-input" name="size" value="'.$size.'" />';
+		echo '<input type="number" class="admin-meta-input" name="_size" value="'.$size.'" />';
 		echo '<br clear="all">';
 		
-		echo '<label>' . __('Cím:') . '</label>';
-		echo '<input type="text" class="admin-meta-input" name="address" value="'.$address.'" />';
+		echo '<label>' . __('Nettó bérleti díj minimum m2:') . '</label>';
+		echo '<input type="text" class="admin-meta-input" name="_price_m2" value="'.$price_m2.'" />';
 		echo '<br clear="all">';
+		
+		echo '<label>' . __('Nettó bérleti díj minimum:') . '</label>';
+		echo '<input type="text" class="admin-meta-input" name="_price_h" value="'.$price_h.'" />';
+		echo '<br clear="all">';		
+		
+		echo '<label>' . __('Pályázati biztosíték:') . '</label>';
+		echo '<input type="number" class="admin-meta-input" name="_plyzbiztkft" value="'.$plyzbiztkft.'" />';
+		echo '<br clear="all">';
+		
+		echo '<label>' . __('Koordináták:') . '</label>';
+		echo '<input type="text" class="admin-meta-input" name="_latlng" value="'.$latlng.'" />';
+		echo '<br clear="all">';				
     }
     
     public function save_metabox($post_id){
+
 		// Check if our nonce is set.
 		if ( ! isset( $_POST['flat-options_nonce'] ) )
 			return $post_id;
 
 		$nonce = $_POST['flat-options_nonce'];
-
 		// Verify that the nonce is valid.
 		if ( ! wp_verify_nonce( $nonce, 'flat-options' ) )
 			return $post_id;
@@ -131,17 +146,21 @@ class FlatPostType {
 				return $post_id;
 		}
 
-		/* OK, its safe for us to save the data now. */
-
 		// Sanitize the user input.
-		$price = (int) $_POST['price'];
-		$address = sanitize_text_field( $_POST['address'] );
-		$size = (int) $_POST['size'];
+		$price = (int) $_POST['_price'];
+		$price_m2 = (int) $_POST['_price_m2'];
+		$price_h = (int) $_POST['_price_h'];
+		$plyzbiztkft = (int) $_POST['_plyzbiztkft'];
+		$size = (int) $_POST['_size'];
+		$latlng = $_POST['_latlng'];
 
 		// Update the meta field.
-		update_post_meta( $post_id, 'price', $price );
-		update_post_meta( $post_id, 'address', $address );
-		update_post_meta( $post_id, 'size', $size );
+		update_post_meta( $post_id, '_price', $price );
+		update_post_meta( $post_id, '_price_m2', $price_m2 );
+		update_post_meta( $post_id, '_price_h', $price_h );
+		update_post_meta( $post_id, '_plyzbiztkft', $plyzbiztkft );
+		update_post_meta( $post_id, '_size', $size );
+		update_post_meta( $post_id, '_latlng', $latlng );
 	    
     }
     
