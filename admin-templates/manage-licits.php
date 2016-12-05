@@ -85,7 +85,7 @@ if (isset($_POST['approve-pending-request'])){
 							<td><?php echo $pr->user_ID?></td>
 							<td><?php echo $user->display_name?></td>
 							<td><?php echo $user->user_email?></td>
-							<td><?php echo $pr->flat_ID?></td>
+							<td><?php echo get_post_meta($pr->flat_ID, 'hr_number', true)?></td>
 							<td><?php echo $pr->date?></td>
 							<td>
 								<form method="post">

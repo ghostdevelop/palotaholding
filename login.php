@@ -59,7 +59,6 @@
 			$arr['ID'] = $user_id;
 			$user_id = wp_update_user( $arr );		
 		} else {
-			echo "asd";
 			$flats_notificaiton = __('Ezt az emailcímet már regisztrálták a rendszerbe. Használj másik email címet vagy ha te regisztráltál korábban kérj új jelszót.', 'palotaholding');			
 		}	
 	}

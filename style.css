@@ -1147,6 +1147,19 @@ a.btn.btn-default.hidder-button i{
 	display: inline-block;
 }
 
+.desc_table table{
+	width: 100%;
+	max-width: 70%;
+}
+
+.desc_table table td{
+	padding: 10px 20px
+}
+
+.desc_table table thead td{
+	background: #ccc;
+}
+
 
 @media screen and (max-width: 600px) {
 table {width:100%;}

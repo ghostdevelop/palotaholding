@@ -42,3 +42,15 @@ function user_can_licit($user_id, $flat_id){
 	return false;
 }
 
+function get_highest_licit($flat_id){
+	global $wpdb;
+	
+	$licit = $wpdb->get_row("SELECT * FROM licits WHERE flat_ID = $flat_id");
+	
+	if (isset($licit->amount)){
+		return $licit->amount;	
+	}	else {
+		return __('Még nem érkezett licit erre az ingatlanra.', 'palotaholding');
+	}
+	
+}

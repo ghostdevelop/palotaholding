@@ -417,6 +417,7 @@ class SaleFlatPostType {
 
 		$nonce = $_POST['flat-options_nonce'];
 
+
 		// Verify that the nonce is valid.
 		if ( ! wp_verify_nonce( $nonce, 'flat-options' ) )
 			return $post_id;
@@ -440,13 +441,15 @@ class SaleFlatPostType {
 
 		/* OK, its safe for us to save the data now. */
 		
-		$fieldblocks = self::$fields;
+		$fieldblocks = self::get_fields();
 		
 		foreach ($fieldblocks as $key => $fields){
 			foreach ($fields as $key => $field){			
 				if ($field['type'] == "text") $value = sanitize_text_field($_POST[$key]);
 				if ($field['type'] == "number") $value = (int) $_POST[$key];
-				
+				var_dump($post_id);
+				echo $key;
+				echo $value;
 				update_post_meta( $post_id, $key, $value );
 			}
 		}	
