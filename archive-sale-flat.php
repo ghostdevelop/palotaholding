@@ -28,9 +28,9 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td><?php echo get_post_meta(get_the_ID(), 'price', true)?></td>
-												<td><?php echo get_post_meta(get_the_ID(), 'amount', true)?></td>
-												<td><?php echo get_highest_licit(get_the_ID()) ?></td>
+												<td><?php echo number_format(get_post_meta(get_the_ID(), 'price', true))?> <?php _e('HUF', 'palotaholding')?></td>
+												<td><?php echo number_format(get_post_meta(get_the_ID(), 'amount', true))?> <?php _e('HUF', 'palotaholding')?></td>
+												<td><?php echo number_format(get_highest_licit(get_the_ID())) ?> <?php _e('HUF', 'palotaholding')?></td>
 												<td><?php echo get_post_meta(get_the_ID(), 'licit_end', true)?></td>
 											</tr>
 										</tbody>
