@@ -55,12 +55,11 @@
 			$user_id = get_current_user_id();
 			$flat_id = (int) $_POST['flat_ID'];
 			$date = get_post_meta($flat_id, 'licit_end', true);
-			$amount = get_post_meta($flat_id, 'price', true) + get_post_meta($flat_id, 'amount', true);
+			$amount = get_highest_licit($flat_id) + get_post_meta($flat_id, 'amount', true);
 			if (user_can_licit($user_id, $flat_id)){	
 				if (strtotime($date) > mktime(0,0,0)){
 					$notifications['success'] = __('Sikeres licit!', 'palotaholding');
 					$licit = $wpdb->update( 'licits', array( 'amount' => $amount ), array( 'user_ID' => $user_id, 'flat_ID' => $flat_id ), array( '%d' ), array( '%d', '%d'  ) );
-					update_post_meta($flat_id, 'price', $amount);
 				} else {
 					$notifications['error'] = __('Sikertelen licit, ez a licit már lejárt.', 'palotaholding');
 				}
@@ -86,30 +85,23 @@
 								<div class="notifications <?php echo $key?>"><?php echo $notifications[$key];?></div>
 							<?php endforeach;?>
 						<?php endif;?>
-						<?php $id = get_the_ID()?>
-						<?php $last_licit = $wpdb->get_row("SELECT * FROM licits WHERE flat_ID = $id");?>
-						<?php 
-							$amount = get_post_meta(get_the_ID(), 'amount', true);							
-						?>
 						<div class="sale-info">
 							<div class="price-box">
 								<div class="price">
-									<label><?php _e('Ár:', 'palotaholding')?></label><span><?php echo number_format(get_post_meta(get_the_ID(), 'price', true))?> HUF</span>
+									<label><?php _e('Legmagasabb licit:', 'palotaholding')?></label><span><?php show_highest_licit(get_the_ID())?></span>
+								</div>							
+								<div class="price">
+									<label><?php _e('Kikiáltási ár:', 'palotaholding')?></label><span><?php show_price(get_the_ID())?></span>
 								</div>
-								<?php if ($amount):?>
-									<div class="amount">
-										<label><?php _e('Licit lépcső:', 'palotaholding')?></label><span><?php echo number_format($amount)?> HUF</span>
-									</div>
-								<?php endif;?>
+								<div class="amount">
+									<label><?php _e('Licit lépcső:', 'palotaholding')?></label><span><?php show_amount(get_the_ID())?></span>
+								</div>
+
 							</div>
 							<div class="dates">
 								<div>
 									<label><?php _e('Utolsó licit ideje:', 'palotaholding')?></label>
-									<?php if (isset($last_licit)):?>
-										<date><?php echo $last_licit->date?></date>
-									<?php else:?>
-										<?php _e('Még nem volt licit erre az ingatlanra', 'palotaholding')?>
-									<?php endif;?>
+									<?php show_last_licit_date(get_the_ID())?>
 								</div>							
 								<div>
 									<label><?php _e('Licit meghírdetett ideje:', 'palotaholding')?></label>
@@ -119,7 +111,7 @@
 									<label><?php _e('Hátralévő idő:', 'palotaholding')?></label><numb id="time-back"></numb>
 									<script type="text/javascript">
 									  jQuery("#time-back")
-									  .countdown("<?php echo get_post_meta(get_the_ID(), 'licit_end', true)?>", function(event) {
+									  .countdown("<?php echo date('Y/m/d',strtotime(get_post_meta(get_the_ID(), 'licit_end', true)))?>", function(event) {
 									    jQuery(this).text(
 									      event.strftime('%D nap %H:%M:%S')
 									    );
@@ -142,23 +134,73 @@
 						<div class="entry-content">
 							<?php the_content() ?>
 						</div>			
-						<?php $parameters = SaleFlatPostType::get_fields('parameters'); $c = 0;?>
+						<?php $parameters = SaleFlatPostType::get_fields('parameters');?>
 						<table class="flat-parameters">
 							<thead>
 								<tr>
-									<th colspan="4"><?php _e('Lakás adatai', 'palotaholding')?></th>
+									<th colspan="4"><?php _e('Ingatlan adatok és településrendezési előírások', 'palotaholding')?></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<?php foreach ($parameters as $key => $parameter): $c++;?>
+								<?php foreach ($parameters as $key => $parameter):?>
+									<tr>
 										<td><?php echo $parameter['label']?></td>
-										<td><?php echo get_post_meta(get_the_ID(), $key, true)?></td>
-										<?php if ($c % 2 == 0):?></tr><tr><?php endif;?>
-									<?php endforeach;?>	
-								</tr>
+										<td><?php echo get_post_meta(get_the_ID(), $key, true)?> <?php echo (isset($parameter['suffix']) ? $parameter['suffix'] : "")?></td>
+									</tr>
+								<?php endforeach;?>	
 							</tbody>
-						</table>						
+						</table>
+						
+						<?php $parameters = SaleFlatPostType::get_fields('info');?>
+						<table class="flat-parameters">
+							<thead>
+								<tr>
+									<th colspan="4"><?php _e('Ingatlanjogi jellemzők', 'palotaholding')?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($parameters as $key => $parameter):?>
+									<tr>
+										<td><?php echo $parameter['label']?></td>
+										<td><?php echo get_post_meta(get_the_ID(), $key, true)?> <?php echo (isset($parameter['suffix']) ? $parameter['suffix'] : "")?></td>
+									</tr>
+								<?php endforeach;?>	
+							</tbody>
+						</table>		
+						
+						<?php $parameters = SaleFlatPostType::get_fields('sources');?>
+						<table class="flat-parameters">
+							<thead>
+								<tr>
+									<th colspan="4"><?php _e('Közművek, energiaellátás, telekommunikáció', 'palotaholding')?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($parameters as $key => $parameter):?>
+									<tr>
+										<td><?php echo $parameter['label']?></td>
+										<td><?php echo get_post_meta(get_the_ID(), $key, true)?> <?php echo (isset($parameter['suffix']) ? $parameter['suffix'] : "")?></td>
+									</tr>
+								<?php endforeach;?>	
+							</tbody>
+						</table>	
+						
+						<?php $parameters = SaleFlatPostType::get_fields('building');?>
+						<table class="flat-parameters">
+							<thead>
+								<tr>
+									<th colspan="4"><?php _e('Építmény (épület) jellemzői', 'palotaholding')?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($parameters as $key => $parameter):?>
+									<tr>
+										<td><?php echo $parameter['label']?></td>
+										<td><?php echo get_post_meta(get_the_ID(), $key, true)?> <?php echo (isset($parameter['suffix']) ? $parameter['suffix'] : "")?><td>
+									</tr>
+								<?php endforeach;?>	
+							</tbody>
+						</table>																					
 
 						<br clear="all">							
 						<?php $images = get_attached_media('image', get_the_ID())?>

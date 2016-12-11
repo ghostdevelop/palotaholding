@@ -15,6 +15,379 @@ class SaleFlatPostType {
     * admin_init action
     */
     public static function get_fields($fieldblock = false) {
+    
+    
+    	/* PARAMETERS */
+		
+		$fields['parameters']['size'] = array(
+			"label" => __('Ingatlan alapterülete:'),
+			"type" => "number",
+			"class" => "",
+			"suffix" => "m<sup>2</sup>"
+		);
+		
+		$fields['parameters']['net_size'] = array(
+			"label" => __('Építmény (épület) nettó alapterülete:'),
+			"type" => "number",
+			"class" => "",
+			"suffix" => "m<sup>2</sup>"
+		);		
+		
+		$fields['parameters']['brut_size'] = array(
+			"label" => __('Építmény (épület) bruttó alapterülete:'),
+			"type" => "number",
+			"class" => "",
+			"suffix" => "m<sup>2</sup>"
+		);		
+		
+		$fields['parameters']['ov_besor'] = array(
+			"label" => __('Övezeti besorolás:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['parameters']['beep_sz'] = array(
+			"label" => __('Beépítési százalék:'),		
+			"type" => "number",
+			"class" => "",
+			"suffix" => "%"
+		);			
+		
+		$fields['parameters']['br_szt_mut'] = array(
+			"label" => __('Szintterületi mutató:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['parameters']['zf_mut'] = array(
+			"label" => __('Zöldfelületi mutató:'),		
+			"type" => "text",
+			"class" => "",
+			"suffix" => "%"
+		);			
+		
+		$fields['parameters']['hom_mag_kis'] = array(
+			"label" => __('Legkisebb homlokzatmagasság:'),		
+			"type" => "number",
+			"class" => "",
+			"suffix" => "m"
+		);	
+				
+		$fields['parameters']['hom_mag_nagy'] = array(
+			"label" => __('Legnagyobb homlokzatmagasság:'),		
+			"type" => "number",
+			"class" => "",
+			"suffix" => "m"
+		);	
+		
+    	/* INFO */
+		
+		$fields['info']['elo_jog'] = array(
+			"label" => __('Elővásárlási jog:'),		
+			"type" => "text",
+			"class" => ""
+		);					
+		
+		$fields['info']['szolg_bej'] = array(
+			"label" => __('Szolgalmi jog bejegyzés:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['info']['korl'] = array(
+			"label" => __('Jelzálog jog:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['info']['haszoneljog'] = array(
+			"label" => __('Haszonélvezeti jog:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['info']['bizvagy'] = array(
+			"label" => __('Bizalmi vagyonkezeléssel érintett-e?'),		
+			"type" => "text",
+			"class" => ""
+		);					
+		
+		$fields['info']['info_egyeb'] = array(
+			"label" => __('Egyéb:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+    	/* SOURCES */		
+		
+		$fields['sources']['viz'] = array(
+			"label" => __('Vezetékes ivóvíz:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['sources']['kut'] = array(
+			"label" => __('Kút:'),		
+			"type" => "text",
+			"class" => ""
+		);				
+		
+		$fields['sources']['sz_viz'] = array(
+			"label" => __('Szennyvízelvezetés:'),		
+			"type" => "text",
+			"class" => ""
+		);
+		
+		$fields['sources']['hazisz_viz'] = array(
+			"label" => __('Házi szennyvízkezelő/emésztő:'),		
+			"type" => "text",
+			"class" => ""
+		);				
+		
+		$fields['sources']['elekt'] = array(
+			"label" => __('Elektromosenergia-ellátás:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['sources']['gaz'] = array(
+			"label" => __('Vezetékes gáz:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['sources']['tavfut'] = array(
+			"label" => __('Távfűtés:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['sources']['kp_futes'] = array(
+			"label" => __('Központi fűtés:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['sources']['egyedi_futes'] = array(
+			"label" => __('Egyedi fűtés:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['sources']['vez_tel'] = array(
+			"label" => __('Vezetékes telefon:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+				
+		$fields['sources']['adatkabel'] = array(
+			"label" => __('Adatátviteli kábel (vezetékes internet/kábeltv):'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['sources']['adatkabel'] = array(
+			"label" => __('Adatátviteli kábel (vezetékes internet/kábeltv):'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['sources']['sources_egyeb'] = array(
+			"label" => __('Egyéb:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		/* Building */		
+			
+		$fields['building']['alap'] = array(
+			"label" => __('Alap:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['building']['alap_anyag'] = array(
+			"label" => __('Alap anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['epul_anyag'] = array(
+			"label" => __('Főfalak anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['building']['epul_allapot'] = array(
+			"label" => __('Főfalak állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['building']['alj_anyag'] = array(
+			"label" => __('Aljzat anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['alj_allapot'] = array(
+			"label" => __('Aljzat állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['teto_anyag'] = array(
+			"label" => __('Tetőszerkezet anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['building']['teto_allapot'] = array(
+			"label" => __('Tetőszerkezet állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['teto_hej'] = array(
+			"label" => __('Héjalás (tetőfedés) anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['building']['teto_kial'] = array(
+			"label" => __('Tetőtér:'),		
+			"type" => "text",
+			"class" => ""
+		);										
+		
+		$fields['building']['nyil_zar_anyag'] = array(
+			"label" => __('Nyílászárók anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['nyil_zar_allapot'] = array(
+			"label" => __('Nyílászárók állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['vizhal_anyag'] = array(
+			"label" => __('Vízhálózat anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);
+					
+		$fields['building']['vizhal_allap'] = array(
+			"label" => __('Vízhálózat állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['building']['sznyvizhal_anyag'] = array(
+			"label" => __('Szennyvízhálózat anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);
+					
+		$fields['building']['sznyvizhal_allap'] = array(
+			"label" => __('Szennyvízhálózat állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['elektr_anyag'] = array(
+			"label" => __('Elektromos vezetékek anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['elektr_allapot'] = array(
+			"label" => __('Elektromos hálózat állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['futes'] = array(
+			"label" => __('Fűtési hálózat (radiátoros, padlófűtés):'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['building']['futcso_anyag'] = array(
+			"label" => __('Fűtéscsövek állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		$fields['building']['futcso_allapot'] = array(
+			"label" => __('Fűtési hálózat állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);		
+		
+		$fields['building']['ker_anyag'] = array(
+			"label" => __('Kerítés anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['building']['ker_allapot'] = array(
+			"label" => __('Kerítés állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['parameters']['kap_anyag'] = array(
+			"label" => __('Kapu anyaga:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['parameters']['kap_allapot'] = array(
+			"label" => __('Kapu állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['parameters']['garazs'] = array(
+			"label" => __('Garázs/gépjárműbeálló:'),		
+			"type" => "text",
+			"class" => ""
+		);						
+							
+		$fields['parameters']['garazs_allapot'] = array(
+			"label" => __('Garázs/gépjárműbeálló állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['parameters']['terasz'] = array(
+			"label" => __('Terasz/télikert:'),		
+			"type" => "text",
+			"class" => ""
+		);						
+								
+		$fields['parameters']['terasz_allapot'] = array(
+			"label" => __('Terasz/télikert állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);					
+	
+		$fields['parameters']['udv_kert_allapot'] = array(
+			"label" => __('Udvar/kert állapota:'),		
+			"type" => "text",
+			"class" => ""
+		);	
+		
+		$fields['parameters']['building_egyeb'] = array(
+			"label" => __('Egyéb:'),		
+			"type" => "text",
+			"class" => ""
+		);			
+		
+		/* LOCATION */
+						
 		$fields['location']['hr_number'] = array(
 			"label" => __('Helyrajzi szám:'),
 			"type" => "text",
@@ -27,11 +400,6 @@ class SaleFlatPostType {
 			"class" => ""
 		);	
 		
-		$fields['parameters']['size'] = array(
-			"label" => __('Alapterület:'),
-			"type" => "number",
-			"class" => ""
-		);				
 		
 		$fields['licit']['price'] = array(
 			"label" => __('Kikiáltási ár:'),
@@ -68,228 +436,6 @@ class SaleFlatPostType {
 			"type" => "text",
 			"class" => "datepicker"
 		);									
-		
-		$fields['parameters']['ov_besor'] = array(
-			"label" => __('Övezeti besorolás:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['beep_sz'] = array(
-			"label" => __('Beépítési százalék:'),		
-			"type" => "number",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['zf_mut'] = array(
-			"label" => __('Zöldfelületi mutató:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['br_szt_mut'] = array(
-			"label" => __('Bruttó szintterületi mutató:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['hom_mag_kis'] = array(
-			"label" => __('Legkisebb homlokzatmagasság:'),		
-			"type" => "number",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['hom_mag_nagy'] = array(
-			"label" => __('Legnagyobb homlokzatmagasság:'),		
-			"type" => "number",
-			"class" => ""
-		);		
-		
-		$fields['parameters']['szolg_bej'] = array(
-			"label" => __('Szolgalmi jog bejegyzés:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['korl'] = array(
-			"label" => __('Korlátozás:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['elo_jog'] = array(
-			"label" => __('Elővásárlási jog:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['br_szt_mut'] = array(
-			"label" => __('Bruttó szintterületi mutató:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['viz'] = array(
-			"label" => __('Vízbekötés:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['sz_viz'] = array(
-			"label" => __('Szennyvízelvezetés:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['elekt'] = array(
-			"label" => __('Elektromos energia:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['tavfut'] = array(
-			"label" => __('Távfűtés:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['gaz'] = array(
-			"label" => __('Gázcsatlakozás:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['ker_anyag'] = array(
-			"label" => __('Kerítés anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['ker_allapot'] = array(
-			"label" => __('Kerítés állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['kap_anyag'] = array(
-			"label" => __('Kapu anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['kap_allapot'] = array(
-			"label" => __('Kapu állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['epul_anyag'] = array(
-			"label" => __('Épület főfalainak anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['epul_allapot'] = array(
-			"label" => __('Épület főfalainak állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['teto_kial'] = array(
-			"label" => __('Tetőszerkezet kialakítása:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['teto_anyag'] = array(
-			"label" => __('Tetőszerkezet anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['teto_allapot'] = array(
-			"label" => __('Tetőszerkezet állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['nyil_zar_anyag'] = array(
-			"label" => __('Nyílászárók anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);			
-		
-		$fields['parameters']['nyil_zar_allapot'] = array(
-			"label" => __('Nyílászárók állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['alj_anyag'] = array(
-			"label" => __('Aljzat anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);			
-		
-		$fields['parameters']['alj_allapot'] = array(
-			"label" => __('Aljzat állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);		
-		
-		$fields['parameters']['futes'] = array(
-			"label" => __('Fűtés:'),		
-			"type" => "text",
-			"class" => ""
-		);			
-		
-		$fields['parameters']['futo_berend'] = array(
-			"label" => __('fűtőberendezés:'),		
-			"type" => "text",
-			"class" => ""
-		);	
-		
-		$fields['parameters']['futcso_anyag'] = array(
-			"label" => __('Fűtéscsövek anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);			
-		
-		$fields['parameters']['futcso_allapot'] = array(
-			"label" => __('Fűtéscsövek állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);																															
-																																		
-		$fields['parameters']['elektr_anyag'] = array(
-			"label" => __('Elektromos vezetékek anyaga:'),		
-			"type" => "text",
-			"class" => ""
-		);			
-		
-		$fields['parameters']['elektr_allapot'] = array(
-			"label" => __('Elektromos vezetékek állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);		
-				
-		$fields['parameters']['udv_kert_allapot'] = array(
-			"label" => __('Udvar/kert állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);		
-						
-		$fields['parameters']['garazs_allapot'] = array(
-			"label" => __('Garázs/gépjárműbeálló állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);			
-								
-		$fields['parameters']['terasz_allapot'] = array(
-			"label" => __('Terasz/télikert állapota:'),		
-			"type" => "text",
-			"class" => ""
-		);	
 		
 		if ($fieldblock == false) return $fields;		
     
@@ -388,7 +534,7 @@ class SaleFlatPostType {
 		echo '</div>';
 		
 		echo '<div class="field-block">';
-		echo '<h2>Lakás adatok</h2>';
+		echo '<h2>Ingatlan adatok és településrendezési előírások</h2>';
 		foreach ($fieldblocks['parameters'] as $key => $field){		
 			echo '<div class="field-holder">';
 			echo '<label>' .$field['label']. '</label>';
@@ -396,7 +542,36 @@ class SaleFlatPostType {
 			echo "</div>";
 		}
 		echo '</div>';
+		
+		echo '<div class="field-block">';
+		echo '<h2>Ingatlanjogi jellemzők</h2>';
+		foreach ($fieldblocks['info'] as $key => $field){		
+			echo '<div class="field-holder">';
+			echo '<label>' .$field['label']. '</label>';
+			echo '<input type="' .$field['type']. '" class="admin-meta-input ' .$field['class']. '" name="' .$key. '" value="' .get_post_meta( $post->ID, $key, true ). '" />';			
+			echo "</div>";
+		}
+		echo '</div>';	
+		
+		echo '<div class="field-block">';
+		echo '<h2>Közművek, energiaellátás, telekommunikáció</h2>';
+		foreach ($fieldblocks['sources'] as $key => $field){		
+			echo '<div class="field-holder">';
+			echo '<label>' .$field['label']. '</label>';
+			echo '<input type="' .$field['type']. '" class="admin-meta-input ' .$field['class']. '" name="' .$key. '" value="' .get_post_meta( $post->ID, $key, true ). '" />';			
+			echo "</div>";
+		}
+		echo '</div>';			
 					
+		echo '<div class="field-block">';
+		echo '<h2>Építmény (épület) jellemzői</h2>';
+		foreach ($fieldblocks['building'] as $key => $field){		
+			echo '<div class="field-holder">';
+			echo '<label>' .$field['label']. '</label>';
+			echo '<input type="' .$field['type']. '" class="admin-meta-input ' .$field['class']. '" name="' .$key. '" value="' .get_post_meta( $post->ID, $key, true ). '" />';			
+			echo "</div>";
+		}
+		echo '</div>';						
 							
 		echo "
 			<script>
@@ -447,9 +622,7 @@ class SaleFlatPostType {
 			foreach ($fields as $key => $field){			
 				if ($field['type'] == "text") $value = sanitize_text_field($_POST[$key]);
 				if ($field['type'] == "number") $value = (int) $_POST[$key];
-				var_dump($post_id);
-				echo $key;
-				echo $value;
+				
 				update_post_meta( $post_id, $key, $value );
 			}
 		}	
